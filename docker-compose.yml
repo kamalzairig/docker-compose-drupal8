@@ -2,8 +2,6 @@ web:
   build: ./
   volumes:
     - ./src/drupal:/var/www/html
-    - ./scripts/web:/scripts
-    - ./conf/drupal:/drupal/conf
     - ./conf/php:/usr/local/etc/php/conf.d
   ports:
     - 80:80
