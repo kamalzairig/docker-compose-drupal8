@@ -1,0 +1,28 @@
+web:
+  build: ./
+  volumes:
+    - ./src/drupal:/var/www/html
+    - ./scripts/web:/scripts
+    - ./conf/drupal:/drupal/conf
+    - ./conf/php:/usr/local/etc/php/conf.d
+  ports:
+    - 80:80
+  links:
+    - db:mysql
+db:
+  image: mysql:5.6
+  environment:
+    MYSQL_ROOT_PASSWORD: P@ssw0rd
+    MYSQL_DATABASE: drupal
+    MYSQL_USER: drupal
+    MYSQL_PASSWORD: P@ssw0rd
+  volumes:
+    - ./data/mysql:/var/lib/mysql
+    - ./conf/mysql:/etc/mysql/conf.d
+phpmyadmin:
+  image: nazarpc/phpmyadmin
+  links:
+    - db:mysql
+  ports:
+    - 81:80
+    
