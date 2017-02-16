@@ -1,8 +1,9 @@
 web:
-  build: ./
+  image: kamalzairig/drupal8
   volumes:
     - ./src/drupal:/var/www/html
     - ./conf/php:/usr/local/etc/php/conf.d
+    - ./conf/ssmtp:/etc/ssmtp
   ports:
     - 80:80
   links:
@@ -18,9 +19,9 @@ db:
     - ./data/mysql:/var/lib/mysql
     - ./conf/mysql:/etc/mysql/conf.d
 phpmyadmin:
-  image: nazarpc/phpmyadmin
+  image: phpmyadmin/phpmyadmin
   links:
-    - db:mysql
+    - db:db
   ports:
     - 81:80
     
